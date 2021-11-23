@@ -1,5 +1,6 @@
 import { LazyExoticComponent } from "react";
 import { lazy } from "react";
+import NoLazy from "../01-lazyload/pages/NoLazy";
 
 type JSXComponent = () => JSX.Element;
 
@@ -10,44 +11,41 @@ interface Route {
   children?: Route[];
 }
 
-const LazyPage1 = lazy(
-  () =>
-    import(
-      /*  webpackChunkName: "LazyPage1" */ "../01-lazyload/pages/LazyPage1"
-    )
-);
-const LazyPage2 = lazy(
-  () =>
-    import(
-      /*  webpackChunkName: "LazyPage2" */ "../01-lazyload/pages/LazyPage2"
-    )
-);
-const LazyPage3 = lazy(
-  () =>
-    import(
-      /*  webpackChunkName: "LazyPage3" */ "../01-lazyload/pages/LazyPage3"
-    )
-);
+//const LazyLayout = lazy(() => import("../01-lazyload/layout/LazyLayout"));
+
+// const LazyPage1 = lazy(
+//   () =>
+//     import(
+//       /*  webpackChunkName: "LazyPage1" */ "../01-lazyload/pages/LazyPage1"
+//     )
+// );
+// const LazyPage2 = lazy(
+//   () =>
+//     import(
+//       /*  webpackChunkName: "LazyPage2" */ "../01-lazyload/pages/LazyPage2"
+//     )
+// );
+// const LazyPage3 = lazy(
+//   () =>
+//     import(
+//       /*  webpackChunkName: "LazyPage3" */ "../01-lazyload/pages/LazyPage3"
+//     )
+// );
 
 export const routes: Route[] = [
   {
-    path: "/lazy1",
-    Component: LazyPage1,
-    name: "LazyPage-1",
+    path: "/lazyload",
+    Component: lazy(
+      () =>
+        import(
+          /*  webpackChunkName: "LazyLayout" */ "../01-lazyload/layout/LazyLayout"
+        )
+    ),
+    name: "Lazyloading Nested",
   },
   {
-    path: "/lazy2",
-    Component: LazyPage2,
-    name: "LazyPage-2",
-  },
-  {
-    path: "/lazy3",
-    Component: LazyPage3,
-    name: "LazyPage-3",
-  },
-  {
-    path: "/lazy4",
-    Component: LazyPage3,
-    name: "LazyPage-4",
+    path: "/no-lazy",
+    Component: NoLazy,
+    name: "No lazy loading",
   },
 ];
